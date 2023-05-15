@@ -1,0 +1,4 @@
+maintenance:
+  enabled: false
+  whitelist:
+  permissions: maintenance.whitelist.bypass

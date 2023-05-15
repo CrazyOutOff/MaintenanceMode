@@ -1,0 +1,7 @@
+author: CrazyOutOff
+name: MaintenanceMode
+version: 1.0
+main: com.crazy.Main
+commands:
+  maintenance:
+    description: Toggle maintenance mode
