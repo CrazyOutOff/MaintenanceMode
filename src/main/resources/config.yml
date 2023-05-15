@@ -1,4 +1,8 @@
 maintenance:
   enabled: false
-  whitelist:
+  reason: "Serveur Actuellement en maintenance"
+  motd: "Serveur actuellement en maintenance"
+  prefix: "MaintenanceMode - "
+  enable: "La maintenance a ete activer"
+  disable: "La maintenance a ete desactiver"
   permissions: maintenance.whitelist.bypass

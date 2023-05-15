@@ -1,9 +1,11 @@
 package com.crazy;
 
 import com.crazy.Command.MaintenanceCMD;
+import com.crazy.Listeners.EventListeners;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -15,12 +17,12 @@ public class Main extends JavaPlugin {
 
     public static Main instance;
 
-    public String prefix = "MaintenanceMode | ";
+    public static String prefix = "MaintenanceMode | ";
 
     public Logger logger = this.getLogger();
 
     private File customConfigFile;
-    private FileConfiguration customConfig;
+    private static FileConfiguration customConfig;
 
 
     @Override
@@ -29,7 +31,11 @@ public class Main extends JavaPlugin {
 
         this.getCommand("maintenance").setExecutor(new MaintenanceCMD());
 
-        createCustomConfig();
+        this.createCustomConfig();
+
+        this.setupListeners();
+
+        prefix = customConfig.getString("maintenance.prefix");
     }
     public static Main getInstance() {
         return instance;
@@ -51,7 +57,12 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
     }
-    public FileConfiguration getCustomConfig() {
-        return this.customConfig;
+    public static FileConfiguration getCustomConfig() {
+        return customConfig;
+    }
+
+    private void setupListeners() {
+        PluginManager pm = this.getServer().getPluginManager();
+        pm.registerEvents(new EventListeners(), this);
     }
 }

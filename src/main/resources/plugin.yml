@@ -5,3 +5,4 @@ main: com.crazy.Main
 commands:
   maintenance:
     description: Toggle maintenance mode
+    permission: maintenance.toggle.allow
