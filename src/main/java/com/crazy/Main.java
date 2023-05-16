@@ -2,6 +2,7 @@ package com.crazy;
 
 import com.crazy.Command.MaintenanceCMD;
 import com.crazy.Listeners.EventListeners;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -21,7 +22,7 @@ public class Main extends JavaPlugin {
 
     public Logger logger = this.getLogger();
 
-    private File customConfigFile;
+    public File customConfigFile = new File(getDataFolder(), "config.yml");;
     private static FileConfiguration customConfig;
 
 
@@ -37,6 +38,14 @@ public class Main extends JavaPlugin {
 
         prefix = customConfig.getString("maintenance.prefix");
     }
+    public void saveConfig() {
+        try {
+            customConfig.save(this.customConfigFile);
+            Bukkit.getServer().getConsoleSender().sendMessage("Config.yml has been saved");
+        } catch (IOException e) {
+            Bukkit.getServer().getConsoleSender().sendMessage("Config.yml could not be saved");
+        }
+    }
     public static Main getInstance() {
         return instance;
     }
@@ -44,7 +53,6 @@ public class Main extends JavaPlugin {
     public Logger logger() {return logger;}
 
     private void createCustomConfig() {
-        customConfigFile = new File(getDataFolder(), "config.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
             saveResource(customConfigFile.getName(), true);
