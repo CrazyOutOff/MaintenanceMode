@@ -1,0 +1,1 @@
+Ce projet est pour apprendre le java, n'utiliser pas ce code en production.
